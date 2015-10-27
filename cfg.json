@@ -1,0 +1,12 @@
+{
+    "database": {
+        "addr": "127.0.0.1:3306",
+        "account": "root",
+        "password": ""
+    },
+    "datasource": {
+        "type": "Open-Falcon",
+        "urlDashboard": "http://127.0.0.1:8081",
+        "urlQuery": "http://127.0.0.1:9966"
+    }
+}

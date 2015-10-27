@@ -1,4 +1,5 @@
 # docker-grafana
+
 Dockerfile for Grafana
 
 ## Build
@@ -6,12 +7,25 @@ Dockerfile for Grafana
 Enter the following command in the repo directory.
 
 ```
-$sudo docker build --tag="grafana:v1" --force-rm=true .
+$sudo docker build --force-rm=true -t grafana .
 ```
 
 ## Run
 
+Use default configuration.
+
 ```
-sudo docker run -ti --name grafana -p 3000:3000 -p 4001:4001 grafana:v1 sh /run.sh
+$sudo docker run -dti --name grafana -p 3000:3000 -p 4001:4001 grafana
 ```
 
+### Advanced Run
+
++ Self-defined configuration
+
+    Replace file **cfg.json** in the volume */config*.
+
+For example, **cfg.json** in /tmp/config,
+
+```
+$sudo docker run -dti --name grafana -v /tmp/config/cfg.json:/config/cfg.json -p 3000:3000 -p 4001:4001 grafana
+```

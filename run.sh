@@ -1,2 +1,4 @@
-node $GRAFANA_DIR/open-falcon/server.js &
-$GRAFANA_DIR/grafana
+#!/bin/bash
+cp $CONFIGDIR/$CONFIGFILE $GRAFANADIR/
+node $GRAFANADIR/open-falcon/server.js &
+$GRAFANADIR/grafana
