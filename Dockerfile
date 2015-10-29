@@ -17,9 +17,9 @@ RUN \
   npm install -g grunt-cli
 
 # Install Grafana
+RUN go get github.com/Cepave/grafana
+WORKDIR $GRAFANADIR
 RUN \
-  go get github.com/Cepave/grafana && \
-  cd $GRAFANADIR && \
   npm i && \
   grunt build && \
   go build .
