@@ -8,24 +8,21 @@ ENV GRAFANADIR=/go/src/github.com/Cepave/grafana CONFIGDIR=/config CONFIGFILE=cf
 # Volume
 VOLUME $CONFIGDIR
 
-# Install Grafana
+# Environment
 RUN \
   apt-get update && \
   apt-get -y install nodejs npm && \
   ln -s /usr/bin/nodejs /usr/bin/node && \
-  git clone https://github.com/Cepave/grafana.git $GRAFANADIR
-
-WORKDIR $GRAFANADIR
-
-RUN \
   npm config set registry="http://registry.npmjs.org/" && \
-  npm install -g grunt-cli && \
-  npm i express request body-parser && \
+  npm install -g grunt-cli
+
+# Install Grafana
+RUN \
+  go get github.com/Cepave/grafana && \
+  cd $GRAFANADIR && \
   npm i && \
-  grunt && \
-  go get ./... && \
-  go build && \
-  (find $GOPATH -name ".git" | xargs rm -fR)
+  grunt build && \
+  go build .
 
 COPY $CONFIGFILE $CONFIGDIR/
 COPY run.sh /run.sh
