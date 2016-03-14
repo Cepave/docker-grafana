@@ -20,10 +20,13 @@ RUN \
 COPY grafana $GRAFANADIR
 WORKDIR $GRAFANADIR
 RUN \
-  go get . && \
-  npm i && \
-  grunt build && \
-  go build .
+  go run build.go setup && \
+  godep restore && \
+  go get github.com/toolkits/file && \
+  go build . && \
+  npm install && \
+  npm install -g grunt-cli && \
+  grunt
 
 COPY $CONFIGFILE $CONFIGDIR/
 COPY run.sh /run.sh
