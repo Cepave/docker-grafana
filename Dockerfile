@@ -17,12 +17,16 @@ RUN \
   npm install -g grunt-cli
 
 # Install Grafana
-RUN go get github.com/Cepave/grafana
+COPY grafana $GRAFANADIR
 WORKDIR $GRAFANADIR
 RUN \
-  npm i && \
-  grunt build && \
-  go build .
+  go run build.go setup && \
+  godep restore && \
+  go get github.com/toolkits/file && \
+  go build . && \
+  npm install && \
+  npm install -g grunt-cli && \
+  grunt
 
 COPY $CONFIGFILE $CONFIGDIR/
 COPY run.sh /run.sh
