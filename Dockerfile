@@ -26,7 +26,7 @@ RUN \
   go build . && \
   npm install && \
   npm install -g grunt-cli && \
-  grunt
+  grunt build
 
 COPY $CONFIGFILE $CONFIGDIR/
 COPY run.sh /run.sh
