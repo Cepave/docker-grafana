@@ -1,9 +1,9 @@
-FROM golang:1.4.2
+FROM golang:1.6
 
 MAINTAINER Don Hsieh <don@cepave.com>
 MAINTAINER minimum@cepave.com
 
-ENV GRAFANADIR=/go/src/github.com/Cepave/grafana CONFIGDIR=/config CONFIGFILE=cfg.json
+ENV GRAFANADIR=/go/src/github.com/Cepave/grafana CONFIGDIR=/config CONFIGFILE=cfg.json GO15VENDOREXPERIMENT=0
 
 # Volume
 VOLUME $CONFIGDIR
