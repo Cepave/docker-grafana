@@ -1,4 +1,4 @@
 [submodule "grafana"]
 	path = grafana
 	url = https://github.com/Cepave/grafana.git
-	branch = develop
+	branch = master
