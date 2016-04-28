@@ -1,4 +1,4 @@
-FROM golang:1.6
+FROM golang:1.5
 
 MAINTAINER Don Hsieh <don@cepave.com>
 MAINTAINER minimum@cepave.com
