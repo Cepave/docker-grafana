@@ -28,7 +28,9 @@ RUN \
   npm config set color false && \
   npm install --silent && \
   npm install -g --silent grunt-cli && \
-  grunt build
+  grunt build && \
+  apt-get autoremove && \
+  apt-get autoclean
 
 COPY $CONFIGFILE $CONFIGDIR/
 COPY run.sh /run.sh
