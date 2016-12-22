@@ -10,11 +10,12 @@ VOLUME $CONFIGDIR
 
 # Environment
 RUN \
-  apt-get update && \
-  apt-get -y install nodejs npm && \
+  apt-get -qq update && \
+  apt-get -qq -y install nodejs npm && \
   ln -s /usr/bin/nodejs /usr/bin/node && \
+  npm config set color false && \
   npm config set registry="http://registry.npmjs.org/" && \
-  npm install -g grunt-cli
+  npm install -g --silent grunt-cli
 
 # Install Grafana
 COPY grafana $GRAFANADIR
@@ -24,8 +25,9 @@ RUN \
   godep restore && \
   go get github.com/toolkits/file && \
   go build . && \
-  npm install && \
-  npm install -g grunt-cli && \
+  npm config set color false && \
+  npm install --silent && \
+  npm install -g --silent grunt-cli && \
   grunt build
 
 COPY $CONFIGFILE $CONFIGDIR/
