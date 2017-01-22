@@ -5,9 +5,6 @@ MAINTAINER minimum@cepave.com
 
 ENV GRAFANADIR=/go/src/github.com/Cepave/grafana CONFIGDIR=/config CONFIGFILE=cfg.json GO15VENDOREXPERIMENT=0
 
-# Volume
-VOLUME $CONFIGDIR
-
 # Environment
 RUN \
   apt-get -qq update && \
@@ -30,13 +27,17 @@ RUN \
   npm install -g --silent grunt-cli && \
   grunt build && \
   apt-get autoremove && \
-  apt-get autoclean
-
-COPY $CONFIGFILE $CONFIGDIR/
-COPY run.sh /run.sh
+  apt-get autoclean && \
+  mkdir -p $CONFIGDIR && \
+  touch $CONFIGDIR/grafana.ini && \
+  ln -sf $CONFIGDIR/grafana.ini $GRAFANADIR/conf/defaults.ini && \
+  rm -f $CONFIGDIR/grafana.ini && \
+  touch $CONFIGDIR/grafana.json && \
+  ln -sf $CONFIGDIR/grafana.json $GRAFANADIR/cfg.json && \
+  rm -f $CONFIGDIR/grafana.json
 
 # Port
 EXPOSE 3000 4001
 
 # Start
-CMD /run.sh
+ENTRYPOINT ["./grafana"]
