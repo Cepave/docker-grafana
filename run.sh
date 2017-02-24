@@ -1,3 +1,0 @@
-#!/bin/bash
-cp $CONFIGDIR/$CONFIGFILE $GRAFANADIR/
-$GRAFANADIR/grafana
