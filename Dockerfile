@@ -29,9 +29,6 @@ RUN \
   apt-get autoremove && \
   apt-get autoclean && \
   mkdir -p $CONFIGDIR && \
-  touch $CONFIGDIR/grafana.ini && \
-  ln -sf $CONFIGDIR/grafana.ini $GRAFANADIR/conf/defaults.ini && \
-  rm -f $CONFIGDIR/grafana.ini && \
   touch $CONFIGDIR/grafana.json && \
   ln -sf $CONFIGDIR/grafana.json $GRAFANADIR/cfg.json && \
   rm -f $CONFIGDIR/grafana.json
@@ -40,4 +37,5 @@ RUN \
 EXPOSE 3000 4001
 
 # Start
-ENTRYPOINT ["./grafana"]
+ENTRYPOINT ["bash", "-c"]
+CMD ["$GRAFANADIR/grafana --config $CONFIGDIR/grafana-custom.ini"]
